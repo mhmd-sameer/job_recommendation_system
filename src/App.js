@@ -38,13 +38,14 @@ const JobRolePredictor = () => {
             data.append(key, formData[key]);
         }
 
-        fetch('http://127.0.0.1:5000/predict', {
+        fetch('https://job-recommendation-system-1-o2aw.onrender.com/predict', {
             method: 'POST',
             body: data,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         })
+        
         .then(response => response.json())
         .then(result => {
             setPrediction(result.prediction);
