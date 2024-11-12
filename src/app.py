@@ -2,9 +2,11 @@ from flask import Flask, request, jsonify
 import pickle
 import pandas as pd
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app) 
+
 # Load your trained model
 with open('knn_model.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
@@ -43,4 +45,6 @@ def predict():
     return jsonify({'prediction': prediction[0]})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Ensure the app runs on the correct port and host
+    port = int(os.environ.get('PORT', 5000))  # Get port from environment variable
+    app.run(host='0.0.0.0', port=port, debug=True)  # Bind to all available IPs
