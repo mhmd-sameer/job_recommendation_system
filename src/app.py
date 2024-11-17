@@ -8,15 +8,17 @@ app = Flask(__name__)
 CORS(app)
 
 # Load your trained model
-# Ensure that the model file is in the correct location
 model_path = os.path.join(os.path.dirname(__file__), 'knn_model.pkl')
 with open(model_path, 'rb') as model_file:
     try:
         model = pickle.load(model_file)
     except AttributeError as e:
-        # Handle any custom class issues that may arise
         print(f"Error loading model: {e}")
         model = None  # Set model to None if loading fails
+
+@app.route('/')
+def home():
+    return 'Welcome to the Flask API!'
 
 @app.route('/predict', methods=['POST'])
 def predict():
