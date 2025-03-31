@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Load your trained model
-model_path = os.path.join(os.path.dirname(__file__), 'knn_model.pkl')
+model_path = os.path.join(os.path.dirname(__file__), 'knn-model.pkl')
 with open(model_path, 'rb') as model_file:
     try:
         model = pickle.load(model_file)
